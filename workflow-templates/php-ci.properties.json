@@ -1,0 +1,7 @@
+{
+  "name": "PHP CI (Magna)",
+  "description": "Validate composer.json, install dependencies, syntax-check sources, and run PHPUnit.",
+  "iconName": "octicon code",
+  "categories": ["PHP", "Continuous integration"],
+  "filePatterns": ["composer.json$"]
+}

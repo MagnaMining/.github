@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install PSScriptAnalyzer
+        shell: pwsh
+        run: Install-Module PSScriptAnalyzer -Force -Scope CurrentUser -ErrorAction Stop
+
+      # Errors fail the build. Warnings are printed but tolerated - a lot of
+      # useful operational scripting trips style rules for good reasons.
+      - name: Analyze
+        shell: pwsh
+        run: |
+          $results = Invoke-ScriptAnalyzer -Path . -Recurse -ErrorAction Continue
+          if ($results) { $results | Format-Table -AutoSize | Out-String | Write-Host }
+
+          $errors = @($results | Where-Object Severity -eq 'Error')
+          if ($errors.Count -gt 0) {
+            Write-Host "::error::PSScriptAnalyzer found $($errors.Count) error(s)."
+            exit 1
+          }
+          Write-Host "No analyzer errors."
+
+      - name: Test
+        shell: pwsh
+        run: |
+          if (Get-ChildItem -Recurse -Filter *.Tests.ps1 -ErrorAction SilentlyContinue) {
+            Install-Module Pester -Force -Scope CurrentUser
+            Invoke-Pester -CI
+          } else {
+            Write-Host "No Pester tests found - skipping."
+          }

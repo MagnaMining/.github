@@ -1,0 +1,7 @@
+{
+  "name": "Node.js CI (Magna)",
+  "description": "Install, lint, test, and build a Node.js project on every push and pull request.",
+  "iconName": "octicon package",
+  "categories": ["JavaScript", "TypeScript", "Continuous integration"],
+  "filePatterns": ["package.json$"]
+}

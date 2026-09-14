@@ -1,0 +1,7 @@
+{
+  "name": "PowerShell CI (Magna)",
+  "description": "Run PSScriptAnalyzer and any Pester tests against PowerShell scripts.",
+  "iconName": "octicon terminal",
+  "categories": ["PowerShell", "Continuous integration"],
+  "filePatterns": ["\\.ps1$", "\\.psm1$"]
+}

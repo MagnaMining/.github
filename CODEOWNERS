@@ -1,0 +1,7 @@
+# Default owner for everything in this repository.
+# Org-wide files — changes here affect every repo that inherits them.
+#
+# Replace with a team handle (e.g. @magnamining/platform) once teams exist;
+# a team is more durable than an individual as the org grows.
+
+*       @jeffcaldwellca

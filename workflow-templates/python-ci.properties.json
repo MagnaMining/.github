@@ -1,0 +1,7 @@
+{
+  "name": "Python CI (Magna)",
+  "description": "Lint with ruff, check formatting, and run pytest on every push and pull request.",
+  "iconName": "octicon terminal",
+  "categories": ["Python", "Continuous integration"],
+  "filePatterns": ["requirements.txt$", "pyproject.toml$"]
+}
