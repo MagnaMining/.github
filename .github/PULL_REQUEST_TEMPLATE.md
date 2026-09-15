@@ -20,3 +20,7 @@
 
 <!-- Migrations, breaking changes, anything touching production data or a live
      integration. Say so here, or delete this section. -->
+
+## Rollback Steps (if applicable)
+
+<!-- Steps that can be followed to rollback this change, include any database migrations, etc. -->
