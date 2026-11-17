@@ -26,7 +26,9 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
-          pip install ruff
+          # Pinned so a new ruff release can't fail CI on code nobody changed.
+          # Bump it on purpose, in its own PR.
+          pip install ruff==0.17.5
 
       - name: Lint
         run: ruff check .
