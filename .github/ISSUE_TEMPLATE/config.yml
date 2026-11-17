@@ -1,8 +1,8 @@
-blank_issues_enabled: true
+blank_issues_enabled: false
 contact_links:
-  - name: Security vulnerability
+  - name: Security problem
     url: https://github.com/magnamining/.github/blob/main/SECURITY.md
-    about: Do not open a public issue. Use private vulnerability reporting.
+    about: Don't open an issue. Report it privately.
   - name: How we work
     url: https://github.com/magnamining/.github/blob/main/CONTRIBUTING.md
-    about: Branching, review, and release conventions for every repo in the org.
+    about: How we branch, commit, review and merge.

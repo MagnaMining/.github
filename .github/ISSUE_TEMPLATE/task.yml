@@ -1,11 +1,11 @@
 name: Task
-description: A piece of work to be done
+description: A piece of work for the IT team to plan and track
 labels: ["task"]
 body:
   - type: textarea
     id: goal
     attributes:
-      label: What needs to happen
+      label: What needs to be done
     validations:
       required: true
 
@@ -13,16 +13,14 @@ body:
     id: why
     attributes:
       label: Why
-      description: What this unblocks, or what it costs us to not do it.
+      description: What this unblocks, or what it costs us to leave it.
     validations:
       required: true
 
   - type: textarea
     id: done
     attributes:
-      label: Done looks like
-      description: How we'll know this is finished.
+      label: How we'll know it's done
+      description: A short checklist. Claude works from this when it picks up the issue.
       placeholder: |
         - [ ] ...
-    validations:
-      required: false
