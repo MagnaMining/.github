@@ -5,7 +5,8 @@ below these, but not contradict them.
 
 ## Before you start
 
-- Read the README and CONTRIBUTING.md. Use the setup, lint and test commands they give.
+- Read the README, and CONTRIBUTING.md if the repo has one. Use the setup, lint and test
+  commands they give.
 - Work on a branch named `<type>/<short-description>`, using one of these types: feat, fix,
   chore, docs, refactor, test. Never commit to `main`.
 - Only change what you were asked to. Don't rename, reformat or refactor other code.
