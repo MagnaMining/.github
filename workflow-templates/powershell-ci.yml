@@ -10,7 +10,9 @@ permissions:
   contents: read
 
 jobs:
-  analyze:
+  # Keep this job named `build`. The org ruleset requires a passing `build`
+  # check before any PR can merge to main.
+  build:
     runs-on: ubuntu-latest
 
     steps:
