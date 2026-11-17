@@ -1,56 +1,43 @@
-name: Bug report
-description: Something is broken or behaving unexpectedly
+name: Something is broken
+description: Report something that isn't working or gives the wrong result
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        If this is a **security** issue, stop and follow
+        Security problem? Don't open an issue. Follow
         [SECURITY.md](https://github.com/magnamining/.github/blob/main/SECURITY.md) instead.
 
   - type: textarea
     id: what-happened
     attributes:
       label: What happened
-      description: What you observed, and what you expected instead.
+      description: What you saw, and what you expected instead.
     validations:
       required: true
 
   - type: textarea
     id: reproduce
     attributes:
-      label: How to reproduce
-      description: Steps, or the conditions that trigger it. "Happens every night around 2am" is a valid answer.
-      placeholder: |
-        1. ...
-        2. ...
+      label: How to make it happen again
+      description: Steps, or when it happens. "Every night around 2am" is a fine answer.
     validations:
       required: true
 
   - type: dropdown
     id: impact
     attributes:
-      label: Impact
+      label: How bad is it
       options:
-        - Blocking - something in production is down or wrong
-        - Degraded - works, but incorrectly or unreliably
-        - Annoying - has a workaround
+        - Down - something in production is broken or wrong
+        - Unreliable - it works, but not properly
+        - Annoying - there's a workaround
     validations:
       required: true
 
   - type: textarea
     id: logs
     attributes:
-      label: Logs or error output
-      description: Paste relevant output. Redact any credentials first.
+      label: Error message or logs
+      description: Optional. Remove any passwords or keys before you paste.
       render: shell
-    validations:
-      required: false
-
-  - type: input
-    id: environment
-    attributes:
-      label: Where
-      description: Which environment, server, or site this occurred on.
-    validations:
-      required: false

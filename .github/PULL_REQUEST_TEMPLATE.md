@@ -1,26 +1,15 @@
-## What changed
+## What and why
 
-<!-- One or two sentences. What does this do that main doesn't? -->
+<!-- 2–4 sentences on what changes and why. Link the issue if there is one: Closes #123 -->
 
-## Why
+## How I tested it
 
-<!-- The reason, not the implementation. Link the issue if there is one: Closes #123 -->
+<!-- What you ran or clicked. "CI only" is fine if that's true. -->
 
-## How to verify
+## Risk and rollback
 
-<!-- Steps a reviewer can actually follow, or "CI covers this" if it genuinely does. -->
+<!-- Does it touch production data, a live integration or a migration? How do you undo it?
+     If none of that applies, write "Low risk". -->
 
-## Checklist
-
-- [ ] No secrets, tokens, connection strings, or internal hostnames in the diff
-- [ ] README updated if setup, config, or deployment changed
-- [ ] CI passes
-
-## Anything risky?
-
-<!-- Migrations, breaking changes, anything touching production data or a live
-     integration. Say so here, or delete this section. -->
-
-## Rollback Steps (if applicable)
-
-<!-- Steps that can be followed to rollback this change, include any database migrations, etc. -->
+- [ ] No secrets, tokens, connection strings or internal hostnames
+- [ ] README updated if setup, config or deployment changed

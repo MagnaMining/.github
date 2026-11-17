@@ -1,0 +1,25 @@
+name: Request a change
+description: Ask for something new, or for something that already exists to work differently
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What do you need
+      description: Describe it in your own words. You don't need to know how it would be built.
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: What problem does this solve, and who does it help?
+    validations:
+      required: true
+
+  - type: input
+    id: when
+    attributes:
+      label: Is there a deadline
+      description: Optional. A date, and what happens if it's missed.

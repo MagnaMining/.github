@@ -1,11 +1,10 @@
 # How we work
 
-This applies to every repository in the `magnamining` org. Individual repos can add to
-it, but shouldn't contradict it.
+This applies to every repository in the `magnamining` org. A repo can add its own rules,
+but shouldn't contradict these.
 
-We're a small team. These conventions exist so that code written by one person is
-readable by the next person — including you, eight months from now, at 2am, when the
-sync job has stopped running and you don't remember writing any of this.
+These rules exist so the next person can read and fix what you wrote, even if that person
+is you in eight months.
 
 ## Branches
 
@@ -22,60 +21,54 @@ docs/working-alone-runbook
 
 Types: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`.
 
-Keep branches short-lived. A branch that has been open for three weeks is a merge
-conflict wearing a trench coat.
+Merge or close a branch within days, not weeks. Long-lived branches cause merge conflicts.
 
 ## Commits
 
-Write the message for the person running `git log` to figure out when something broke.
+Write for the person reading `git log` to find out when something broke.
+
+- **Subject line:** plain English that starts with a verb, under 72 characters, with no full
+  stop. Say what the change does.
+- **Body:** optional. Add one only when the reason isn't obvious from the diff, and keep it
+  to a few lines on *why*. The diff already shows what changed.
+- **One change per commit.** Don't mix a fix with unrelated cleanup.
+- **No AI attribution.** Whoever commits is the author, whatever tool helped.
 
 ```
 Fix timezone drift in Avanti calendar sync
 
-Avanti returns shift times in local time without an offset. We were
-parsing them as UTC, so every shift after the DST change landed an
-hour early.
-
-Parse with the site's timezone explicitly rather than relying on the
-runtime default.
+Avanti sends shift times without a UTC offset and we were reading
+them as UTC, so shifts after the DST change landed an hour early.
 ```
 
-Subject line in the imperative mood, under ~72 characters, no trailing period. If the
-change needs explaining, explain **why** in the body — the diff already shows what.
+Not: `Update sync.py`, `fixes`, `WIP`, `feat(sync): misc changes`.
 
 ## Pull requests
 
-Every change to `main` goes through a PR. Yes, including small ones. Yes, even when
-you're the only person who touched that repo.
+Every change to `main` goes through a PR, including small ones and repos only you work on.
+The PR is the record of why a change was made, and where CI runs before it goes live.
 
-The point isn't ceremony — it's that PRs give you a searchable record of why a change
-happened, a place for CI to run before the change is live, and a diff someone can read
-later without reconstructing it from commits.
+- **Title:** same rules as a commit subject. It becomes the commit on `main`.
+- **Description:** fill in the template in a few lines. Aim for something a reviewer can
+  read in under a minute. Leave out detail the diff already shows.
+- **Before you open it:** CI passes, there are no secrets or internal hostnames in the
+  diff, and the README still matches how the thing runs.
+- **Merge:** squash and merge. That's the only method allowed, and the branch is deleted
+  automatically.
+- **Reviews:** none are required while the team is one person. Once there's a second
+  developer, one approval will be required. Until then, ask someone to look at anything
+  risky.
 
-**Before you open it:**
-- CI passes locally if you can run it
-- No secrets, tokens, connection strings, or internal hostnames in the diff
-- The README still matches reality if you changed how the thing runs
+**Reviewing.** Be direct about problems and quick to approve. Say whether something is
+broken or just not how you'd have done it. Only the first is a reason to block. Review
+within two days.
 
-**Reviews.** One approval is required on `main`. If you're genuinely the only person
-available — the other dev is away and it can't wait — an org admin can bypass. Use that
-for real urgency, not to skip a review that would have been mildly inconvenient.
+## Claude
 
-If you bypass, say so in the PR description and get a post-hoc read when someone's back.
-
-**Reviewing.** Be direct about problems and quick about approving. Distinguish
-"this is broken" from "I'd have done it differently" — the second one is a comment,
-not a blocker. A PR sitting unreviewed for two days is worse for the codebase than
-almost anything that could be in it.
-
-## Merging
-
-**Squash and merge** is the default. One PR, one commit on `main`, clean history.
-
-Use a merge commit only when the individual commits genuinely tell a story worth
-keeping. Rebase-and-merge if you've curated the commits deliberately.
-
-Delete the branch after merging. The button does it for you.
+Claude is the only AI coding tool we use. Every repo has a `CLAUDE.md` at its root, copied
+from the [org standard](https://github.com/magnamining/.github/blob/main/CLAUDE.md). Add
+repo-specific rules below the org ones. Don't change the org rules in a single repo; change
+them here.
 
 ## Every repo needs a README that answers
 
@@ -86,27 +79,27 @@ Delete the branch after merging. The button does it for you.
    never values.
 5. **Who owns it, and what's the first thing to check when it's broken?**
 
-A repo without this is a repo only one person can maintain.
+Without these answers, only one person can maintain the repo.
 
 ## Secrets
 
-Never commit them. Push protection will block you, which is the system working
-correctly.
+Never commit them. Push protection blocks known credential patterns, and a ruleset blocks
+key, certificate and `.env` files.
 
-If you push a secret and it gets through: **rotate it first, then clean the history.**
-Rotation is the fix. Removing it from git is cleanup. Deleting the commit does not
-un-leak a credential that was on GitHub's servers.
+If a secret gets through: **rotate it first, then clean the history.** Rotating it is the
+fix. Removing it from git is cleanup. Deleting the commit doesn't help once a credential
+has been on GitHub's servers.
 
-Config that varies by environment goes in environment variables. Commit a
-`.env.example` with the keys and dummy values so the next person knows what to set.
+Config that varies by environment goes in environment variables. Commit a `.env.example`
+with the keys and dummy values so the next person knows what to set.
 
 ## Dependencies
 
-Commit your lockfile — `package-lock.json`, `requirements.txt` pinned, `composer.lock`.
-Reproducible builds matter more than being on the newest version.
+Commit your lockfile: `package-lock.json`, a pinned `requirements.txt`, or `composer.lock`.
+Builds you can reproduce matter more than being on the newest version.
 
-Dependabot opens patch PRs. Triage them weekly. Security advisories get handled the
-week they appear; everything else can batch.
+Dependabot opens patch PRs. Triage them weekly. Handle security advisories the week they
+appear; everything else can be batched.
 
 ## Naming repositories
 
@@ -116,5 +109,5 @@ magna-<system>-<function>     integrations       magna-topvu-vend-sync
 ops-<area>                    operations tooling ops-ad-automation
 ```
 
-Lowercase, hyphens, no underscores, no spaces. Descriptive over clever — you will
-search for these by name in two years.
+Lowercase, hyphens, no underscores, no spaces. Choose a descriptive name over a clever one.
+You'll be searching for it by name in two years.
