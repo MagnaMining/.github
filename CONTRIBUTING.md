@@ -104,10 +104,20 @@ appear; everything else can be batched.
 ## Naming repositories
 
 ```
-magna-<system>-<function>     integrations       magna-topvu-vend-sync
-<department>-<thing>          internal apps      helpdesk-form
-ops-<area>                    operations tooling ops-ad-automation
+<department>-<thing>     apps and tools a department owns    it-helpdesk, hr-crewcount
+<system>-<function>      integrations and exports            topvu-vend-sync, dext-expense-export
 ```
 
-Lowercase, hyphens, no underscores, no spaces. Choose a descriptive name over a clever one.
-You'll be searching for it by name in two years.
+- Lowercase, hyphens, no underscores, no spaces.
+- `<department>` is one of the agreed department codes. IT tooling is `it-<thing>`.
+- `<system>` is the system the data comes **from**, from the agreed system list.
+- Department and system codes never overlap, so the first word tells you which kind of
+  repo it is. Add a new department or system to the list first.
+- `<thing>` can be the product name staff know a tool by (`hr-crewcount`). The repo
+  description then says what it does. Otherwise, choose a descriptive name over a clever
+  one: you'll be searching for it by name in two years.
+
+The department and system codes are in the member-only
+[repo naming codes](https://github.com/magnamining/.github-private/blob/main/docs/repo-naming-codes.md).
+The asset naming tool in the IT helpdesk (IT Tools → Asset Naming → GitHub repository)
+builds names by these rules.
